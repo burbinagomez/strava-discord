@@ -48,7 +48,8 @@ def ping():
 
 @app.route("/")
 async def index():
-    if datetime.datetime.fromtimestamp(app.config['STRAVA_TOKEN_EXPIRE']) > datetime.datetime.now():
+    print(app.config['STRAVA_TOKEN_EXPIRE'])
+    if datetime.datetime.fromtimestamp(float(app.config['STRAVA_TOKEN_EXPIRE'])) > datetime.datetime.now():
         id = 1100162
         data = requests.get(
             f"{app.config['STRAVA_API_URL']}/clubs/{id}/activities",headers={"Authorization": f"Bearer {app.config['STRAVA_TOKEN']}"}
