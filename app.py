@@ -76,4 +76,3 @@ async def index():
     return {'message':"Transaccion correcta"}
 
 fill_data()
-app.run()
