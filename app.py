@@ -58,6 +58,7 @@ async def index():
         club_activities = [json.loads(redis_client.lindex('CLUB_ACTIVITIES', x)) for x in range(redis_client.llen('CLUB_ACTIVITIES'))]
         new_activities = [x for x in data if x not in club_activities]
         if len(new_activities) == 0:
+            redis_client.delete("CLUB_ACTIVITIES")
             for x in data:
                 redis_client.lpush('CLUB_ACTIVITIES',json.dumps(x))
             redis_client.ltrim('CLUB_ACTIVITIES',0,29)
